@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @RestController
 public class citasReactivaResource {
 
@@ -48,4 +50,13 @@ public class citasReactivaResource {
         return this.icitasReactivaService.findAll();
     }
 
+    @PutMapping(value = "/cancelarcita/{idPaciente}")
+    private Flux<citasDTOReactiva> cancel(@PathVariable("idPaciente") String idPaciente){
+        Flux<citasDTOReactiva> paciente = this.icitasReactivaService.findByIdPaciente(idPaciente);
+
+        return paciente.flatMap(paciente1 -> {
+            paciente1.setEstadoReservaCita("0");
+            return save(paciente1);
+        });
+    }
 }
