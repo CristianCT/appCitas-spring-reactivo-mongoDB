@@ -72,4 +72,11 @@ public class citasReactivaResource {
                 .findByFechaReservaCita(fechaReservaCitaLocalDate)
                 .filter(cita -> cita.getHoraReservaCita().equals(horaReservaCita));
     }
+
+    @GetMapping(value = "/citasReactivas/{idPaciente}/medico")
+    private String findByIdMedico(@PathVariable("idPaciente") String idPaciente){
+        citasDTOReactiva paciente = this.icitasReactivaService.findByIdPaciente(idPaciente).blockFirst();
+
+        return paciente.getNombreMedico().concat(" ").concat(paciente.getApellidosMedico());
+    }
 }
