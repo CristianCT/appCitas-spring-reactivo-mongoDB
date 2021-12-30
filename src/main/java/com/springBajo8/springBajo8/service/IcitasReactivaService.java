@@ -5,6 +5,8 @@ import com.springBajo8.springBajo8.domain.citasDTOReactiva;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+
 public interface IcitasReactivaService {
     Mono<citasDTOReactiva> save(citasDTOReactiva citasDTOReactiva);
 
@@ -15,6 +17,8 @@ public interface IcitasReactivaService {
     Flux<citasDTOReactiva> findByIdPaciente(String idPaciente);
 
     Flux<citasDTOReactiva> findAll();
+
+    Flux<citasDTOReactiva> findByFechaReservaCita(LocalDate fechaReservaCita);
 
     Mono<citasDTOReactiva> findById(String id);
 }

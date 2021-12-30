@@ -3,6 +3,7 @@ package com.springBajo8.springBajo8.web;
 
 import com.springBajo8.springBajo8.domain.citasDTOReactiva;
 import com.springBajo8.springBajo8.service.IcitasReactivaService;
+import com.springBajo8.springBajo8.service.impl.citasReactivaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @RestController
@@ -58,5 +61,15 @@ public class citasReactivaResource {
             paciente1.setEstadoReservaCita("0");
             return save(paciente1);
         });
+    }
+
+    @GetMapping(value = "/citasReactivas/{fechaReservaCita}/{horaReservaCita}")
+    private Flux<citasDTOReactiva> findByFechaReservaCita(@PathVariable("fechaReservaCita") String fechaReservaCita, @PathVariable("horaReservaCita") String horaReservaCita){
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaReservaCitaLocalDate = LocalDate.parse(fechaReservaCita, format);
+
+        return this.icitasReactivaService
+                .findByFechaReservaCita(fechaReservaCitaLocalDate)
+                .filter(cita -> cita.getHoraReservaCita().equals(horaReservaCita));
     }
 }
