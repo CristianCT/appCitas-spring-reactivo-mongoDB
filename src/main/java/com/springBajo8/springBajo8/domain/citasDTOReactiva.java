@@ -23,6 +23,10 @@ public class citasDTOReactiva {
 
     private String apellidosMedico;
 
+    private String padecimiento;
+
+    private String tratamiento;
+
     private LocalDate fechaReservaCita;
 
     private String horaReservaCita;
@@ -75,6 +79,22 @@ public class citasDTOReactiva {
 
     public void setApellidosMedico(String apellidosMedico) {
         this.apellidosMedico = apellidosMedico;
+    }
+
+    public String getPadecimiento() {
+        return padecimiento;
+    }
+
+    public void setPadecimiento(String padecimiento) {
+        this.padecimiento = padecimiento;
+    }
+
+    public String getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(String tratamiento) {
+        this.tratamiento = tratamiento;
     }
 
     public LocalDate getFechaReservaCita() {
