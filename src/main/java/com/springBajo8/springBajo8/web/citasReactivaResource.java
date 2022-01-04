@@ -59,7 +59,27 @@ public class citasReactivaResource {
         Flux<citasDTOReactiva> paciente = this.icitasReactivaService.findByIdPaciente(idPaciente);
 
         return paciente.flatMap(paciente1 -> {
-            paciente1.setEstadoReservaCita("0");
+            paciente1.setEstadoReservaCita(false);
+            return save(paciente1);
+        });
+    }
+
+    @PutMapping(value = "/citasReactivas/cancelarcita/{idCita}")
+    private Mono<citasDTOReactiva> cancelCita(@PathVariable("idCita") String idCita){
+        Mono<citasDTOReactiva> paciente = this.icitasReactivaService.findById(idCita);
+
+        return paciente.flatMap(paciente1 -> {
+            paciente1.setEstadoReservaCita(false);
+            return save(paciente1);
+        });
+    }
+
+    @PutMapping(value = "/citasReactivas/reactivarcita/{idCita}")
+    private Mono<citasDTOReactiva> reactivarCita(@PathVariable("idCita") String idCita){
+        Mono<citasDTOReactiva> paciente = this.icitasReactivaService.findById(idCita);
+
+        return paciente.flatMap(paciente1 -> {
+            paciente1.setEstadoReservaCita(true);
             return save(paciente1);
         });
     }
@@ -86,5 +106,10 @@ public class citasReactivaResource {
         return this.icitasReactivaService.findByIdPaciente(idPaciente).flatMap(paciente -> {
             return Mono.just(paciente.getPadecimiento());
         });
+    }
+
+    @GetMapping(value = "/citasReactivas/{idCita}")
+    private Mono<citasDTOReactiva> findCitaById(@PathVariable("idCita") String idCita){
+        return this.icitasReactivaService.findById(idCita);
     }
 }

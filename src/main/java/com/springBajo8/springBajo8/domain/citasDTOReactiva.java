@@ -31,7 +31,7 @@ public class citasDTOReactiva {
 
     private String horaReservaCita;
 
-    private String estadoReservaCita;
+    private Boolean estadoReservaCita;
 
     public String getId() {
         return id;
@@ -113,11 +113,11 @@ public class citasDTOReactiva {
         this.horaReservaCita = horaReservaCita;
     }
 
-    public String getEstadoReservaCita() {
+    public Boolean getEstadoReservaCita() {
         return estadoReservaCita;
     }
 
-    public void setEstadoReservaCita(String estadoReservaCita) {
+    public void setEstadoReservaCita(Boolean estadoReservaCita) {
         this.estadoReservaCita = estadoReservaCita;
     }
 
