@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class citasReactivaResource {
 
     @Autowired
